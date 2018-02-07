@@ -1,0 +1,26 @@
+homeassistant:
+  latitude: 48
+  longitude: 11
+  elevation: 519
+  name: Home
+  temperature_unit: C
+  time_zone: Europe/Berlin
+  unit_system: metric
+
+config:
+
+cloud:
+  alexa:
+
+discovery:
+
+ifttt:
+  key: ifttt_key
+
+sun:
+
+hue:
+  bridges:
+    - host: 192.168.178.20
+      allow_unreachable: true
+alexa:

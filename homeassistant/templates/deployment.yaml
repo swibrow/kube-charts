@@ -1,0 +1,61 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "homeassistant.fullname" . }}
+  labels:
+    app: {{ template "homeassistant.name" . }}
+    chart: {{ template "homeassistant.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "homeassistant.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "homeassistant.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      initContainers:
+      - name: "init-config"
+        image: "busybox"
+        command:
+          - wget
+          - "-O"
+          - "/"
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: workdir
+              mountPath: /config
+          ports:
+            - name: http
+              containerPort: {{ .Values.image.containerport }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.image.containerport }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.image.containerport }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

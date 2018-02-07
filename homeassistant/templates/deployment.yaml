@@ -45,10 +45,12 @@ spec:
             httpGet:
               path: /
               port: {{ .Values.image.containerport }}
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /
               port: {{ .Values.image.containerport }}
+            initialDelaySeconds: 60
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

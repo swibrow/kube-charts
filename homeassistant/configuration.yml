@@ -12,7 +12,7 @@ config:
 # cloud:
 #   alexa:
 
-discovery:
+# discovery:
 
 # ifttt:
 #   key: ifttt_key

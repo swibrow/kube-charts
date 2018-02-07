@@ -20,19 +20,23 @@ spec:
         release: {{ .Release.Name }}
     spec:
       initContainers:
-      - name: "init-config"
-        image: "busybox"
-        command:
-          - wget
-          - "-O"
-          - "/"
+        - name: "init-config"
+          image: "busybox"
+          command:
+            - wget
+            - "-O"
+            - "/config/configuration.yaml"
+            - "https://raw.githubusercontent.com/swibrow/kube-charts/master/homeassistant/configuration.yml"
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-            - name: workdir
-              mountPath: /config
+            - name: config
+              mountPath: "/config"
           ports:
             - name: http
               containerPort: {{ .Values.image.containerport }}
@@ -59,3 +63,6 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
+      volumes:
+        - name: config
+          emptyDir: {}

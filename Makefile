@@ -10,5 +10,6 @@ homeassistant:
 	 homeassistant \
 	 --namespace home-automation \
 	 --values homeassistant/values.yaml \
-	 --set image=homeassistant/home-assistant:0.62.1
+	 --set image.repository=homeassistant/home-assistant
+	 --set inage.tag=0.62.1
 	 --set TZ=Europe/Berlin

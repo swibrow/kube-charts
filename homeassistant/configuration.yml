@@ -9,13 +9,13 @@ homeassistant:
 
 config:
 
-cloud:
-  alexa:
+# cloud:
+#   alexa:
 
 discovery:
 
-ifttt:
-  key: ifttt_key
+# ifttt:
+#   key: ifttt_key
 
 sun:
 
@@ -23,4 +23,4 @@ hue:
   bridges:
     - host: 192.168.178.20
       allow_unreachable: true
-alexa:
+# alexa:

@@ -12,8 +12,9 @@ image:
   pullPolicy: Always
   containerport: 8123
 
-config:
-  link: "https://raw.githubusercontent.com/swibrow/kube-charts/master/homeassistant/configuration.yml"
+configFiles:
+  configuration: "https://raw.githubusercontent.com/swibrow/kube-charts/master/homeassistant/configuration.yml"
+  phue: "https://raw.githubusercontent.com/swibrow/kube-charts/master/homeassistant/phue.conf"
 
 service:
   name: homeassistant

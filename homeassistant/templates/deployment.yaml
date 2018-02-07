@@ -23,15 +23,20 @@ spec:
         - name: "init-config"
           image: "busybox"
           command:
-            - wget
+            - "wget"
             - "-O"
             - "/config/configuration.yaml"
-            - {{ .Values.configFiles.configuration }}
-            - "&&"
-            - wget
+            - "{{ .Values.configFiles.configuration }}"
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+        - name: "init-phue"
+          image: "busybox"
+          command:
+            - "wget"
             - "-O"
             - "/config/phue.conf"
-            - {{ .Values.configFiles.phue }}
+            - "{{ .Values.configFiles.phue }}"
           volumeMounts:
             - name: config
               mountPath: "/config"
@@ -53,7 +58,7 @@ spec:
             initialDelaySeconds: 5
           readinessProbe:
             httpGet:
-              path: /states
+              path: /
               port: {{ .Values.image.containerport }}
             initialDelaySeconds: 15
           resources:

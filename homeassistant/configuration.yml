@@ -1,3 +1,5 @@
+frontend:
+
 homeassistant:
   latitude: 48
   longitude: 11
@@ -6,7 +8,9 @@ homeassistant:
   temperature_unit: C
   time_zone: Europe/Berlin
   unit_system: metric
-
+  
+map:
+history:
 config:
 
 # cloud:
@@ -18,9 +22,12 @@ config:
 #   key: ifttt_key
 
 sun:
-
-# hue:
-#   bridges:
-#     - host: 192.168.178.20
-#       allow_unreachable: true
+# Weather prediction
+sensor:
+  - platform: yr
+  
+hue:
+  bridges:
+    - host: 192.168.178.20
+      allow_unreachable: true
 # alexa:

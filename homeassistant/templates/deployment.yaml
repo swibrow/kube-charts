@@ -26,7 +26,12 @@ spec:
             - wget
             - "-O"
             - "/config/configuration.yaml"
-            - "https://raw.githubusercontent.com/swibrow/kube-charts/master/homeassistant/configuration.yml"
+            - {{ .Values.configFiles.configuration }}
+            - "&&"
+            - wget
+            - "-O"
+            - "/config/phue.conf"
+            - {{ .Values.configFiles.phue }}
           volumeMounts:
             - name: config
               mountPath: "/config"
@@ -45,12 +50,12 @@ spec:
             httpGet:
               path: /
               port: {{ .Values.image.containerport }}
-            initialDelaySeconds: 60
+            initialDelaySeconds: 5
           readinessProbe:
             httpGet:
-              path: /
+              path: /states
               port: {{ .Values.image.containerport }}
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

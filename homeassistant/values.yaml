@@ -8,9 +8,12 @@ replicaCount: 1
 
 image:
   repository: homeassistant/home-assistant
-  tag: latest
+  tag: 0.62.1
   pullPolicy: Always
   containerport: 8123
+
+config:
+  link: "https://raw.githubusercontent.com/swibrow/kube-charts/master/homeassistant/configuration.yml"
 
 service:
   name: homeassistant

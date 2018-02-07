@@ -19,8 +19,8 @@ config:
 
 sun:
 
-hue:
-  bridges:
-    - host: 192.168.178.20
-      allow_unreachable: true
+# hue:
+#   bridges:
+#     - host: 192.168.178.20
+#       allow_unreachable: true
 # alexa:

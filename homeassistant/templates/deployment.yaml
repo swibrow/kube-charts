@@ -22,21 +22,7 @@ spec:
       initContainers:
         - name: "init-config"
           image: "busybox"
-          command:
-            - "wget"
-            - "-O"
-            - "/config/configuration.yaml"
-            - "{{ .Values.configFiles.configuration }}"
-          volumeMounts:
-            - name: config
-              mountPath: "/config"
-        - name: "init-phue"
-          image: "busybox"
-          command:
-            - "wget"
-            - "-O"
-            - "/config/phue.conf"
-            - "{{ .Values.configFiles.phue }}"
+          command: ["sh", "-c", "wget -O /config/configuration.yaml {{ .Values.configFiles.configuration }}; wget -O /config/phue.conf {{ .Values.configFiles.phue }}"]
           volumeMounts:
             - name: config
               mountPath: "/config"

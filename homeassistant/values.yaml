@@ -17,21 +17,19 @@ configFiles:
   phue: "https://raw.githubusercontent.com/swibrow/kube-charts/master/homeassistant/phue.conf"
 
 service:
-  name: homeassistant
+  # name: homeassistant
   type: ClusterIP
   port: 80
   targetport: 8123
 
 ingress:
-  enabled: false
-  annotations: {
-    kubernetes.io/ingress.class: nginx
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
     # kubernetes.io/tls-acme: "true"
-  }
-  path: /
   hosts:
-    - homeassistant.k8s.fritz.box
-  tls: []
+    - homeassistant.k8s.wibrow.net
+  # tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local

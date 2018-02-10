@@ -19,6 +19,7 @@ spec:
         app: {{ template "homeassistant.name" . }}
         release: {{ .Release.Name }}
     spec:
+      hostNetwork: true
       initContainers:
         - name: "init-config"
           image: "busybox"

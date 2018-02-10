@@ -8,7 +8,7 @@ homeassistant:
   temperature_unit: C
   time_zone: Europe/Berlin
   unit_system: metric
-  
+
 map:
 history:
 config:
@@ -16,7 +16,7 @@ config:
 # cloud:
 #   alexa:
 
-# discovery:
+discovery:
 
 # ifttt:
 #   key: ifttt_key
@@ -25,7 +25,7 @@ sun:
 # Weather prediction
 sensor:
   - platform: yr
-  
+
 hue:
   bridges:
     - host: 192.168.178.20

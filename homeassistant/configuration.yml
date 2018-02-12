@@ -35,6 +35,13 @@ switch:
   - platform: tplink
     host: 192.168.178.24
 
+media_player:
+  - platform: samsungtv
+    host: 192.168.178.29
+    port: 8001
+
+
+
 device_tracker:
   - platform: fritz
 # alexa:
